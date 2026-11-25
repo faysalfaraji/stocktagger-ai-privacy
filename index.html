@@ -86,43 +86,58 @@
     </div>
     <p class="brand-tagline">AI-powered title &amp; keyword auto-fill for Adobe Stock contributors.</p>
     <h1>Privacy Policy</h1>
-    <p class="meta">Effective November 20, 2026 (Taglo was previously called AI StockTagger)</p>
+    <p class="meta">Effective November 25, 2026 (Taglo was previously called AI StockTagger)</p>
   </div>
 
   <div class="card lead">
     <h2 style="margin-top:0;border:none;padding-bottom:0;"><span class="num">01</span>In short</h2>
-    <p>Taglo generates titles and keywords for your Adobe Stock uploads using AI, directly inside
-    your own browser. Your API keys and generated history stay <strong>only on your own device</strong>.
-    We don't run a server and we don't collect your data. The only place your image content is ever sent
-    is the AI provider (Gemini, Groq, OpenRouter or OpenAI) whose key <strong>you</strong> added, using
-    <strong>your own</strong> API key.</p>
+    <p>Taglo generates titles and keywords for your Adobe Stock uploads using AI, with <strong>your own</strong>
+    API key. To count your daily limit and keep Taglo secure, each request passes through our server over an
+    encrypted connection to the AI service you chose. We never save your images, titles, keywords or API key.
+    Your API keys and your history stay <strong>on your own device</strong>.</p>
   </div>
 
   <h2><span class="num">02</span>What Taglo does</h2>
   <p>When you click <strong>Generate</strong> or <strong>Generate All</strong> on an Adobe Stock upload page,
-  the extension reads the thumbnail image of each item and sends it to an AI provider whose key you added,
-  to generate a title and keyword suggestions. If you added keys for more than one provider, free providers
-  are tried first, and the next provider is used only if one fails. The result is written back into Adobe
-  Stock's own title/keyword fields on the page you're already on. That's the entire function of the
-  extension.</p>
+  the extension reads the thumbnail image of each item and sends it, together with your API key for that
+  request, through our server to the AI provider whose key you added, to generate a title and keyword
+  suggestions. If you added keys for more than one provider, free providers are tried first, and the next
+  provider is used only if one fails. The result is written back into Adobe Stock's own title/keyword fields
+  on the page you're already on.</p>
+  <p>Free daily images work without an account. If you have PromptMaster Pro, you can sign in with your
+  PromptMaster Pro email and activation key for a bigger daily number. The <strong>Dashboard</strong> button
+  opens your PromptMaster Pro dashboard already signed in, using a one-time code that works once and only
+  for one minute.</p>
 
-  <h2><span class="num">03</span>What we do not collect</h2>
+  <h2><span class="num">03</span>What our server keeps, and what it never keeps</h2>
+  <p>Our server keeps only what it needs to count your daily images and keep you signed in:</p>
   <ul>
-    <li>We do not operate a backend server. There is no server owned by us that receives, stores, or logs
-      your images, API keys, or generation history.</li>
+    <li><strong>Daily image counts.</strong> For free use, a count is linked to a random ID that Taglo makes
+      on your device and to a scrambled (one-way hashed) form of your IP address. When you are signed in, it
+      is linked to your account. Counts are deleted after about 10 days.</li>
+    <li><strong>Your sign-in, only if you sign in.</strong> Your email and activation key, so you stay signed
+      in, for up to 30 days after you last use Taglo. Signing out removes it. The sign-in token itself is kept
+      only in scrambled form.</li>
+    <li><strong>Basic technical logs</strong> from our hosting provider, such as the time and address of a
+      request, kept for up to 7 days to find and fix errors.</li>
+  </ul>
+  <p>What we never do:</p>
+  <ul>
+    <li>We never save your images, titles, keywords or API keys. They are used for the single request and
+      then forgotten.</li>
     <li>We do not sell, rent, or share any data with advertisers or data brokers.</li>
-    <li>We do not include analytics, telemetry, or third-party tracking scripts.</li>
+    <li>The extension has no analytics, telemetry, or third-party tracking scripts.</li>
     <li>We do not read, modify, or inject anything into any website other than Adobe Stock's contributor
       upload pages (<code>contributor.stock.adobe.com</code>).</li>
   </ul>
 
   <h2><span class="num">04</span>Where your data lives</h2>
   <p>Everything the extension stores (your API keys, your model choices, generation history capped at
-  1,000 entries, the optional account-email note, and your preferences) lives in your browser's local
-  extension storage (<code>chrome.storage.local</code>) <strong>on your own device only</strong>. It is never synced
-  to, or backed up on, any server we operate. Uninstalling the extension, or removing it from
-  <code>chrome://extensions</code>, permanently deletes this data. You can also clear your history or export
-  it as a CSV file (saved to your own computer) at any time from the History tab.</p>
+  1,000 entries, your PromptMaster Pro sign-in if you use it, the random device ID, and your preferences)
+  lives in your browser's local extension storage (<code>chrome.storage.local</code>) <strong>on your own
+  device</strong>. It is not synced to, or backed up on, our server. Uninstalling the extension, or removing
+  it from <code>chrome://extensions</code>, permanently deletes this data. You can also clear your history or
+  export it as a CSV file (saved to your own computer) at any time from the History tab.</p>
 
   <h2><span class="num">05</span>Permissions we ask for, and why</h2>
   <table>
@@ -131,11 +146,14 @@
     <tr><td><code>contributor.stock.adobe.com</code></td><td>To read the selected thumbnail and title/keyword fields on Adobe Stock's own upload page, and to write the generated title/keywords back into them.</td></tr>
     <tr><td><code>*.ftcdn.net</code></td><td>Adobe Stock serves thumbnail images from this CDN domain (a different origin than the upload page itself). This permission lets the extension fetch the selected thumbnail for AI analysis without a browser cross-origin block.</td></tr>
   </table>
-  <p class="muted">No permission broader than this (e.g. access to all websites) is requested.</p>
+  <p class="muted">No permission broader than this (e.g. access to all websites) is requested. Taglo also
+  connects to our own server (<code>promptmaster-pro.promptmasterfaysal.workers.dev</code>) for the things
+  described above; this needs no extra permission.</p>
 
-  <h2><span class="num">06</span>Third-party AI providers</h2>
-  <p>Generation happens using <strong>your own</strong> API key. The image and a short text prompt for that
-  single request are sent directly from your browser to a provider whose key you added:</p>
+  <h2><span class="num">06</span>Our server and the AI providers</h2>
+  <p>Our server runs on Cloudflare (<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a>).
+  Generation uses <strong>your own</strong> API key. For each request, our server passes the image and a short
+  text prompt to the provider you chose and returns its answer to Taglo:</p>
   <ul>
     <li>Google Gemini: <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">Gemini API Additional Terms of Service</a></li>
     <li>Groq: <a href="https://groq.com/privacy-policy/" target="_blank" rel="noopener">groq.com/privacy-policy</a></li>
@@ -146,8 +164,8 @@
   companies may use requests to train or improve their models. You can turn this off in your OpenRouter
   account's privacy settings.</p>
   <p>These providers process the request under their own privacy policies, which we encourage you to review.
-  We have no visibility into, or control over, how they handle data beyond the single request the extension
-  sends on your behalf.</p>
+  We have no visibility into, or control over, how they handle data beyond the single request sent on your
+  behalf.</p>
 
   <h2><span class="num">07</span>Children's privacy</h2>
   <p>Taglo is a tool for Adobe Stock contributors and is not directed at children. We do not
